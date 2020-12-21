@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="./styles/main.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Main Content -->
+    <div class="container-md col-md-5 py-2" style="background-color: whitesmoke; ">
+        <h2 id="item-name"></h2>
+        
+        <div class="row">
+            <div class="col-md-4 flex-inline-wrap" id="rating-container"></div>
+            <div class="col-md-6"><p class="text-muted my-small-text"><span id="reviews"></span> reviews</p></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4"><h4 class="text-red">$<span id="discounted-price"></span></h4></div>
+            <div class="col-md-2"><p class="text-muted my-small-text">$<span id="price"></span></p></div>
+            <div class="col-md-3"><p class="text-muted my-small-text"><span id="discount"></span>% off</p></div>
+        </div>
+
+        <div class="row">
+            <p class="my-mid-text">ONLINE EXCLUSIVE</p>
+        </div>
+
+        <div class="row">
+            <p class="my-mid-text fw-bold">COLOR: <span id="color" class="fw-normal"></span></p>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row" id="color-container">
+                
+            </div>
+        </div>
+
+        <div class="row">
+            <p class="fw-bold my-small-text">Size Guide</p>
+        </div>
+
+        <div class="row">
+            <p class="fw-bold my-small-text">Your Custom Fit</p>
+        </div>
+
+        <div class="row gx-2">
+            <span class="col-3 border border-3 px-4 py-2 rounded-pill my-span" id="count"></span>
+            <button class="btn btn-dark col-8 mx-2 rounded-pill" id="btn-add-cart" data-bs-toggle="modal" data-bs-target="#quantityModal">Add to Cart</button>
+            <button class="btn btn-dark col-8 mx-2 rounded-pill" id="btn-checkout" data-bs-toggle="modal" data-bs-target="#checkoutModal" hidden>Checkout</button>
+        </div>
+
+        <hr/>
+
+        <div class="row">
+            <p class="fw-bold my-small-text">DETAILS</p>
+            <div class="row" id="details-color-container">
+                
+            </div>
+        </div>
+
+        <hr/>
+
+        <div class="row">
+            <a href="#" data-bs-toggle="modal" data-bs-target="#helpModal" class="link-dark fw-bold my-small-text no-underline">Need Help?</a>
+        </div>
+        
+        <div class="row">
+            <a href="#" class="link-dark fw-bold my-small-text no-underline">Shipping & Returns</a>
+        </div>
+
+    </div>
+
+    <div id="background"></div>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="quantityModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body p-4">
+                <p class="text-center">Please enter the quantity of the item you selected</p>
+
+                <div class="row my-5">
+                    <p id="modal-item-name"></p>
+                    <div class="gap-2 d-md-flex justify-content-md-end my-min-container">
+
+                        <span onclick="onRemoveItemCount()" class="my-min">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-dash-circle-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
+                            </svg>
+                        </span>
+
+                        <h1 class="my-min" id="modal-count"></h1>
+
+                        <span onclick="onAddItemCount()" class="my-min">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                            </svg>
+                        </span>
+
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="button" class="btn btn-outline-success my-succeess" data-bs-dismiss="modal" onclick="onAddToCart()" id="btn-agree" disabled>Agree</button>
+                    <button type="button" class="btn btn-outline-danger my-danger" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkoutModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Checkout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                
+                <div id="chechout-main">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Color</th>
+                        <th scope="col">Units</th>
+                        <th scope="col">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody id="checkout-table-body">
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-outline-success my-succeess" onclick="reload()">Checkout</button>
+                    <button type="button" class="btn btn-outline-danger my-danger" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div class="modal" tabindex="-1" id="helpModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">What can we help you with?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="accordion" id="accordionExample">
+
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            What are my delivery options and how much does it cost?
+                        </button>
+                      </h2>
+                      <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Standard delivery is FREE for orders totalling $10 or more. You can view all our delivery options <a href="#">here</a> to find out how much it costs and how long each option takes.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            How do I cancel an order?
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            If you've received your order confirmation but not yet paid for your order (e.g. if you've selected to pay by regular EFT or Cash On Delivery), then you can request a cancellation <a href="#">here</a>.
+
+                            If you have paid already, your order can't be cancelled and your items can only be returned to us after they've been delivered. You can do this by following our returns process, as long as your order falls within our Returns Policy.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            How can I pay for my order?
+                        </button>
+                      </h2>
+                      <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            We have lots of safe and easy ways to pay, which you can view <a href="#">here</a>.
+
+                            Some options are only available for certain orders and all available payment methods will be presented to you at checkout.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Is it safe to shop with you?
+                          </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            We take the security of your payment and personal information seriously. See section 6 of our Terms and Conditions for details of options available to you, and the Payment FAQ above.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFive">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            How do I unsubscribe from your email newsletters?
+                          </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            To update your newsletter preferences, go to My Account at the top of every page and click on Newsletter Subscriptions in the Customer Information section. Here you can update your interests by ticking the available interest fields.
+
+                            If you don’t want to receive any newsletters you can tick the last box, 'Unsubscribe from all newsletters', and then click on the 'Save preferences' button.
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>
