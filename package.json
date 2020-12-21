@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Steven-MKN/zaio-upskilling/issues"
   },
-  "homepage": "https://github.com/Steven-MKN/zaio-upskilling#readme"
+  "homepage": "https://github.com/Steven-MKN/zaio-upskilling#readme",
+  "dependencies": {
+    "node": "^15.4.0"
+  }
 }
