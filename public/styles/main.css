@@ -1,96 +1,40 @@
-@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css");
-
-.my-color {
-    width: 25px;
-    height: 25px;
-    background: rgb(241, 154, 23);
-    border-radius: 12.5px;
-    padding: 10px;
-    margin: 5px;
+#hero-container {
+    height: 50vh;
+    background: radial-gradient(ellipse at top, transparent, #3158a1),
+    radial-gradient(ellipse at bottom, transparent, #26a3c9);
+    
 }
 
-.my-color:hover {
-    border: 2px solid rgba(100, 100, 100, 0.692);
-    width: 27px;
-    height: 27px;
-    border-radius: 13.5px;
+#hero-container > h1 {
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -60%);
 }
 
-.my-color-checked {
-    border: 2px solid rgba(100, 100, 100, 0.692);
+#projects-container {
+    margin-top: -100px;
 }
 
-.rating-icon {
-    margin: 1px;
-    padding: 0px;
-    width: 16px;
+.card {
+    box-shadow: 0 4px 8px 0 #3158a1;
+    cursor: default;
+    color: #757575;
+    min-height: 120px;
 }
 
-.my-small-text {
-    font-size: 12px;
+.card > div > h5{
+    margin-top: 20%;
+    margin-left: 50%;
+    transform: translate(-50%, -50%);
+    width: max-content;
 }
 
-.my-mid-text {
-    font-size: 14px;
+.clickable{
+    color: #000000;
 }
 
-.text-red {
-    color: rgb(212, 85, 103);
-}
-
-.my-span {
-    width: min-content;
-    border: 1px solid black !important;
-}
-
-.no-underline{
-    text-decoration: none;
-}
-
-.my-succeess {
-    background-color: rgb(218, 230, 215);
-    color: black;
-}
-
-.my-danger {
-    background-color: rgb(230, 207, 205);
-    color: black;
-}
-
-.modal {
-    transform: scale(.3);
-    transition: all .3s ease-in;
-}
-
-.modal.show {
-    opacity: 1;
-    transform: scale(1);
-    transition: all .3s ease-in;
-}
-.my-min {
-    width: min-content !important;
-    justify-content: center;
-}
-
-.my-min-container {
-    display: inline-flex
-}
-
-.my-table-p {
-    line-height: 35px;
-}
-
-body {
-    position: relative;
-    background-color: rgb(2, 2, 87);
-}
-
-#background {
-    background-color: rgb(102, 102, 102);
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    z-index: -1;
-    clip-path: polygon(0 13%, 49% 62%, 100% 38%, 100% 59%, 83% 93%, 0% 50%);
+.clickable:hover {
+    box-shadow: 0 4px 8px 0 #000000;
+    top: -2px;
+    right: -1px;
 }
