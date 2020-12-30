@@ -6,12 +6,6 @@
       "**/.*",
       "**/node_modules/**",
       "**/.DS_Store/**"
-    ],
-    "rewrites": [
-      {
-        "source": "/todo_list",
-        "destination": "/todo_list/build"
-      }
     ]
   }
 }
