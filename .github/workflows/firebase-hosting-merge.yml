@@ -24,6 +24,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci --prefix ./public/todo_list
       - run: npm run build --prefix ./public/todo_list
+      - run: mv -v ./public/todo_list/build/* ./public/todo_list
       
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
