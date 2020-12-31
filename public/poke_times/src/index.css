@@ -5,19 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  padding-bottom: 400px;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-.todo-conetnt {
-  margin-left: 5px;
-}
-
-.my-list-btn {
-  margin-right: 5px;
 }

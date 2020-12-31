@@ -25,11 +25,11 @@ class AddTodo extends Component{
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <form className="center" onSubmit={ this.onSubmit }>
                     <label>Add new todo:</label>   
                     
-                    <input className="" type="text" value={ this.state.content } onChange={ this.onTextChange } id="content" />                       
+                    <input className="" type="text" value={ this.state.content } onChange={ this.onTextChange } id="content" placeholder="e.g: make the bed"/>                       
                          
                     <button className="btn waves-effect waves-light center" type="submit" name="action">Add
                         <i className="material-icons right">add</i>
