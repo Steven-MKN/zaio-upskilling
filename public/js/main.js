@@ -9,7 +9,7 @@ class Project{
 
 let projects = [
     new Project('./phase_one', 'HTML, CSS & JS'),
-    new Project('', 'React Todo List'),
+    new Project('./todo_list', 'React Todo List'),
     new Project('', 'Poke Time app'),
     new Project('', 'marioplan app'),
     new Project('', 'Node Todo list'),
