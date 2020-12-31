@@ -8,10 +8,10 @@ const todos = ({ todos, deleteTodo, addTodo, completeTodo, undoTodo }) => {
         if (todo.complete){
             completeList.push(
                 <div className="collection-item" key={ todo.id }>
-                    <a className="waves-effect waves-light btn-small my-list-btn grey" onClick={ () => undoTodo(todo.id) }>
+                    <a href="#/" className="waves-effect waves-light btn-small my-list-btn grey" onClick={ () => undoTodo(todo.id) }>
                         <i className="material-icons">undo</i>
                     </a>
-                    <a className="waves-effect waves-light btn-small my-list-btn grey" onClick={ () => deleteTodo(todo.id) }>
+                    <a href="#/" className="waves-effect waves-light btn-small my-list-btn grey" onClick={ () => deleteTodo(todo.id) }>
                         <i className="material-icons">delete</i>
                     </a>
                     <span className="todo-conetnt">
@@ -22,7 +22,7 @@ const todos = ({ todos, deleteTodo, addTodo, completeTodo, undoTodo }) => {
         } else {
             todoList.push(
                 <div className="collection-item" key={ todo.id }>
-                    <a className="waves-effect waves-light btn-small my-list-btn" onClick={ () => completeTodo(todo.id) }>
+                    <a href="#/" className="waves-effect waves-light btn-small my-list-btn" onClick={ () => completeTodo(todo.id) }>
                         <i className="material-icons">check</i>
                     </a>
                     <span className="todo-conetnt">{ todo.content }</span>
