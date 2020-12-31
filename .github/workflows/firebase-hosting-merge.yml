@@ -18,13 +18,21 @@ jobs:
       - uses: actions/checkout@v2
       - run: npm ci && npm run build
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: setup todo list app
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci --prefix ./public/todo_list
       - run: npm run build --prefix ./public/todo_list
       - run: mv -v ./public/todo_list/build/* ./public/todo_list
+      
+      - name: setup poke times app
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci --prefix ./public/poke_times
+      - run: npm run build --prefix ./public/poke_times
+      - run: mv -v ./public/poke_times/build/* ./public/poke_times
       
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
