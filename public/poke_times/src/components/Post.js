@@ -6,6 +6,7 @@ import Comments from './Comments'
 import AddComment from './AddComment'
 
 class Post extends Component {
+
     onDeletePost = () => {
         this.props.deletePost(this.props.post.id)
         this.props.history.goBack.length > 0 ? this.props.history.goBack()

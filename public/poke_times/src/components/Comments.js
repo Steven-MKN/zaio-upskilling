@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class Comments extends Component {
+
     render() {
-        const commentsList = this.props.comments.map( comment => {
+        let commentsList = this.props.comments.map( comment => {
             return (
                 <div key= { comment.id }>
                     <p >{ comment.body }</p>                
@@ -28,7 +29,7 @@ const mapStateToProps = (state, ownProps) => {
     let id = ownProps.id
     return {
         // eslint-disable-next-line
-        comments: state.posts.find(post => id == post.id).comments
+        comments: [...state.posts.find(post => id == post.id).comments]
     }
 }
 

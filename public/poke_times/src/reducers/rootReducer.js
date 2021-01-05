@@ -46,8 +46,10 @@ const rootReducer = (state = initState, action) => {
             let i = state.posts.findIndex(p => action.id == p.id)
             let id = getId(state.posts[i].comments)
             let comment = { id, body: action.comment}
-            state.posts[i].comments.push(comment)
-            return { ...state }
+            
+            let newState = { ...state }
+            newState.posts[i].comments.push(comment)
+            return newState
         
         default: return state
     }
