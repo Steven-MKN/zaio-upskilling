@@ -57,3 +57,17 @@ code {
     display: none;
   }
 }
+
+.add-post-btn {
+  position: fixed;
+  right: 30px;
+  bottom: 50px;
+}
+
+#addPostModal {
+  top: 0;
+}
+
+.materialize-textarea {
+  height: 150px !important;
+}

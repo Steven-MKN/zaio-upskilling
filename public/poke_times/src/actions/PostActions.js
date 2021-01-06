@@ -9,3 +9,7 @@ export const likePost = (id) => {
 export const addComment = (id, comment) => {
     return { type: 'ADD_COMMENT', id, comment }
 }
+
+export const addPost = (title, body) => {
+    return { type: 'ADD_POST', title, body }
+}

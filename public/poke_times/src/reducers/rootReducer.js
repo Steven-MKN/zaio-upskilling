@@ -50,6 +50,21 @@ const rootReducer = (state = initState, action) => {
             let newState = { ...state }
             newState.posts[i].comments.push(comment)
             return newState
+
+        case 'ADD_POST':
+            let postId = getId(state.posts)
+            let newPost = {
+                id: postId,
+                title: action.title,
+                body: action.body,
+                liked: false,
+                comments:[]
+            }
+
+            return {
+                ...state,
+                posts: [...state.posts, newPost]                
+            }
         
         default: return state
     }

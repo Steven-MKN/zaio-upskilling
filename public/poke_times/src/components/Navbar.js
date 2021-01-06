@@ -16,7 +16,7 @@ class Navbar extends Component {
                 
                     <a className="brand-logo" href="/">Poke'Times</a>
     
-                    <a href="#/" className="waves-effect waves-teal btn-flat nav-toggler" onClick={ this.onNavToggle }><i class="material-icons left">menu</i></a>
+                    <a href="#/" className="waves-effect waves-teal btn-flat nav-toggler" onClick={ this.onNavToggle }><i className="material-icons left">menu</i></a>
                     
                     <ul className="right red darken-3 nav-list-big">                                    
                         <li><NavLink to={ process.env.PUBLIC_URL + "/" }>Home</NavLink></li>
@@ -26,7 +26,7 @@ class Navbar extends Component {
 
                     <ul className="right red darken-3 nav-list" ref={ref => this.nav = ref}>
                         
-                        <a href="#/" class="waves-effect waves-teal btn-flat nav-close" onClick={ this.onNavToggle }><i class="material-icons left">close</i></a>
+                        <a href="#/" className="waves-effect waves-teal btn-flat nav-close" onClick={ this.onNavToggle }><i className="material-icons left">close</i></a>
 
                         <li><NavLink to={ process.env.PUBLIC_URL + "/" } onClick={ this.onNavToggle }>Home</NavLink></li>
                         <li><NavLink to={ process.env.PUBLIC_URL + "/about" } onClick={ this.onNavToggle }>About</NavLink></li>
