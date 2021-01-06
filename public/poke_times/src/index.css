@@ -11,3 +11,63 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.action-container {
+  margin-top: 10px;
+}
+
+.comment-container {
+  margin-left: 20px;
+}
+
+.nav-toggler {
+  width: min-content;
+  height: min-content;
+  position: absolute;
+  right: 10px;
+  display: none;
+}
+
+.nav-list {
+  display: none;
+  z-index: 99;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  align-content: baseline;
+  text-align: center;
+  left: 0;
+  top: 0;
+}
+
+.nav-list:active {
+  display: none;
+}
+
+.nav-close {
+  width: min-content;
+}
+
+@media only screen and (max-width: 700px){
+  .nav-toggler {
+    display: block;
+  }
+
+  .nav-list-big {
+    display: none;
+  }
+}
+
+.add-post-btn {
+  position: fixed;
+  right: 30px;
+  bottom: 50px;
+}
+
+#addPostModal {
+  top: 0;
+}
+
+.materialize-textarea {
+  height: 150px !important;
+}

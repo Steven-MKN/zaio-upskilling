@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { deletePost } from '../actions/PostActions'
+import { deletePost, likePost } from '../actions/PostActions'
+import { Link } from 'react-router-dom'
+import Comments from './Comments'
+import AddComment from './AddComment'
 
 class Post extends Component {
+
     onDeletePost = () => {
         this.props.deletePost(this.props.post.id)
         this.props.history.goBack.length > 0 ? this.props.history.goBack()
         : this.props.history.push( process.env.PUBLIC_URL )
+    }
+
+    onLikePost = (id) => {
+        this.props.likePost(id)
     }
 
     render() {
@@ -14,10 +22,10 @@ class Post extends Component {
             <div className="post">
                 <h4 className="center">{ this.props.post.title }</h4>
                 <p>{ this.props.post.body }</p>
-                <div className="center">
-                    <button className="btn grey" onClick={ this.onDeletePost }>
-                        Delete post
-                    </button>
+                <div className="row action-container">
+                    <Link to="#/" onClick={ () => this.onLikePost(this.props.post.id) }> <i className={ 'tiny material-icons ' + ( this.props.post.liked ? 'blue' :  'grey' ) + '-text col s2' }>thumb_up</i> </Link>                
+                    <Link to="#/"> <i className="tiny material-icons grey-text col s2">share</i> </Link>
+                    <Link to="#/" onClick={ this.onDeletePost }> <i className="tiny material-icons red-text col s2">delete</i> </Link>
                 </div>
             </div>
         ) : (
@@ -27,6 +35,9 @@ class Post extends Component {
         return (
             <div className="container">
                 { post }
+                <h6>Comments:</h6>
+                <Comments id={ this.props.post.id } />
+                <AddComment id={ this.props.post.id }/>
             </div>
         )
     }
@@ -46,8 +57,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         deletePost: (id) => {
             dispatch(deletePost(id))
+        },
+        likePost: (id) => {
+            dispatch(likePost(id))
         }
     }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post)
