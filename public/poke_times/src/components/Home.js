@@ -22,7 +22,7 @@ class Home extends Component {
                         <p>{ post.body }</p>
                         <div className="row action-container">
                             <Link to="#/" onClick={ () => this.onLikePost(post.id) }> <i className={ likeBtnClassName }>thumb_up</i> </Link>
-                            <Link to="#/"> <i className="tiny material-icons grey-text col s2">comment</i> </Link>
+                            <Link to={ process.env.PUBLIC_URL + '/post/' + post.id }> <i className="tiny material-icons grey-text col s2">comment</i> </Link>
                             <Link to="#/"> <i className="tiny material-icons grey-text col s2">share</i> </Link>
                         </div>
                     </div>

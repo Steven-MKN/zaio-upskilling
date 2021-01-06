@@ -27,7 +27,7 @@ class AddComment extends Component {
     render() {
         return (
             <div className="input-field">
-                <input placeholder="write comment here" id="input_comment" type="text" value={ this.state.comment } onChange={ this.onTextChange }/>
+                <input placeholder="write comment here" id="input_comment" type="text" value={ this.state.comment } onChange={ this.onTextChange } />
                 <button className="btn waves-effect waves-light center" onClick={ this.onAddComment }>Add</button>
             </div>
         )

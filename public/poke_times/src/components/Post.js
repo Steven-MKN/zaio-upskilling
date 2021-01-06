@@ -23,8 +23,7 @@ class Post extends Component {
                 <h4 className="center">{ this.props.post.title }</h4>
                 <p>{ this.props.post.body }</p>
                 <div className="row action-container">
-                    <Link to="#/" onClick={ () => this.onLikePost(this.props.post.id) }> <i className={ 'tiny material-icons ' + ( this.props.post.liked ? 'blue' :  'grey' ) + '-text col s2' }>thumb_up</i> </Link>
-                    <Link to="#/"> <i className="tiny material-icons grey-text col s2">comment</i> </Link>
+                    <Link to="#/" onClick={ () => this.onLikePost(this.props.post.id) }> <i className={ 'tiny material-icons ' + ( this.props.post.liked ? 'blue' :  'grey' ) + '-text col s2' }>thumb_up</i> </Link>                
                     <Link to="#/"> <i className="tiny material-icons grey-text col s2">share</i> </Link>
                     <Link to="#/" onClick={ this.onDeletePost }> <i className="tiny material-icons red-text col s2">delete</i> </Link>
                 </div>
