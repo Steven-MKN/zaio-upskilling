@@ -14,7 +14,7 @@ class Navbar extends Component {
             <nav className="nav-wrapper red darken-3">
                 <div className="container row">
                 
-                    <a className="brand-logo" href="/">Poke'Times</a>
+                    <NavLink className="brand-logo" to={ process.env.PUBLIC_URL + "/" }>Poke'Times</NavLink>
     
                     <a href="#/" className="waves-effect waves-teal btn-flat nav-toggler" onClick={ this.onNavToggle }><i className="material-icons left">menu</i></a>
                     

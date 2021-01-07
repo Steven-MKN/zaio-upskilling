@@ -33,6 +33,14 @@ jobs:
       - run: npm ci --prefix ./public/poke_times
       - run: npm run build --prefix ./public/poke_times
       - run: mv -v ./public/poke_times/build/* ./public/poke_times
+
+      - name: setup mario plan app
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci --prefix ./public/poke_times
+      - run: npm run build --prefix ./public/mario_plan
+      - run: mv -v ./public/mario_plan/build/* ./public/mario_plan
       
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:

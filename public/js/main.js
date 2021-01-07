@@ -11,7 +11,7 @@ let projects = [
     new Project('./phase_one', 'HTML, CSS & JS'),
     new Project('./todo_list', 'React Todo List'),
     new Project('./poke_times', 'Poke Time app'),
-    new Project('', 'marioplan app'),
+    new Project('./mario_plan', 'marioplan app'),
     new Project('', 'Node Todo list'),
     new Project('', 'REST API'),
     new Project('', 'Property24 App')
