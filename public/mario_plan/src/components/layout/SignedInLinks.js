@@ -13,7 +13,7 @@ const SignedInLinks = (props) => {
                 <NavLink to={ process.env.PUBLIC_URL + '/logout' } >Log Out</NavLink>  
             </li>
             <li>
-                <NavLink to={ process.env.PUBLIC_URL + '' } className="btn btn-floating pink lighten-1">ST</NavLink>
+                <NavLink to={ process.env.PUBLIC_URL + '' } className="btn btn-floating pink lighten-1">{ props.initials }</NavLink>
             </li>
         </ul>
     )

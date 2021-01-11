@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import SignedInLinks from './SignedInLinks'
 import SignedOutLinks from './SignedOutLinks'
-// import { AuthReducer } from '../../reducers/AuthReducer'
 import { connect } from 'react-redux'
 
 const Navbar = (props) => {
@@ -11,7 +10,7 @@ const Navbar = (props) => {
             <div className="container">
                 <Link to={ process.env.PUBLIC_URL } className="brand-logo">Mario Plan</Link>
 
-                { props.auth && props.auth.uuid ? <SignedInLinks /> : <SignedOutLinks /> }
+                { props.auth && props.auth.uuid ? <SignedInLinks initials={ props.auth.initials }/> : <SignedOutLinks /> }
                                 
             </div>
         </nav>

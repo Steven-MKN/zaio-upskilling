@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { loginUser } from "../../store/actions/AuthActions";
+import { Redirect } from 'react-router-dom'
 
 class SignIn extends Component {
     state = {
@@ -22,10 +23,13 @@ class SignIn extends Component {
             password: this.state.password.trim()
         })
         
-        this.props.loginUser(this.state)
+        this.props.loginUser({ ...this.state })
     }
 
     render() {
+        if (this.props.auth && this.props.auth.uuid)
+            return <Redirect to={ process.env.PUBLIC_URL + '/'} />
+
         return (
             <div className="container">
                 {
@@ -58,7 +62,7 @@ class SignIn extends Component {
 const mapStateToProps = (state) => {
     console.log(state)
     return {
-        ...state
+        ...state.auth
     }
 }
 

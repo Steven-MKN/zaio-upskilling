@@ -27,6 +27,7 @@ class App extends Component {
             <Route path={ process.env.PUBLIC_URL + '/signup' } component={ SignUp } />
             <Route path={ process.env.PUBLIC_URL + '/create' } component={ CreateProject } />
             <Route path={ process.env.PUBLIC_URL + '/logout' } component={ Logout } />
+            <Route path={ process.env.PUBLIC_URL + '/*' } component={ Dashboard } />
           </Switch>
         </div>
       </BrowserRouter>

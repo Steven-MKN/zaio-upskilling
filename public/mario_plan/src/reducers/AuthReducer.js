@@ -11,12 +11,32 @@ const AuthReducer = (state = initState, action) => {
                 ...state,
                 error: null,
                 auth: {
+                    ...action.data,
+                    uuid: action.user.user.uid,
+                    email: action.user.user.email,                    
+                }
+            }
+
+        case 'LOGIN_USER_ERROR':
+            console.log(action.error)
+            return {
+                ...state,
+                error: action.error
+            }
+
+        case 'SIGN_UP':
+            console.log(action)
+            return {
+                ...state,
+                error: null,
+                auth: {
+                    ...action.data,
                     uuid: action.user.user.uid,
                     email: action.user.user.email
                 }
             }
 
-        case 'LOGIN_USER_ERROR':
+        case 'SIGN_UP_ERROR':
             console.log(action.error)
             return {
                 ...state,
@@ -42,18 +62,23 @@ const AuthReducer = (state = initState, action) => {
         case 'GET_INIT_STATE': 
             console.log(action)
 
-            const { user } = action
+            const { user, data } = action
             if (user){
                 return {
                     ...state,
                     auth: {
-                        uuid: user.user.uid,
-                        email: user.user.email
+                        ...data,
+                        uuid: user.uid,
+                        email: user.email
                     }
                 }
             } else {
                 return state
-            }         
+            } 
+            
+        case 'GET_INIT_STATE_ERROR': 
+            console.log(action.error)
+            return state
 
         default: return state
     }
