@@ -1,21 +1,77 @@
+let projectSubscription = null
+
 export const createProject = (project) => {
-    return async (dispatch, getState, { getFirebase, getFirestore }) => {
-        // const firestore = getFirestore()
+    return async (dispatch, getState, { firebase }) => {
 
-        // try {
-        //     await firestore.collection('projects').add({
-        //         ...project,
-        //         authorFirstName: 'Net',
-        //         authorLastName: 'Ninja',
-        //         authorId: 12345,
-        //         createdAt: new Date()
-        //     })
+        try {
+            const firestore = firebase.firestore()
 
-        //     dispatch({type: 'CREATE_PROJECT', project})
+            await firestore.collection('projects').add({
+                ...project,
+                authorFirstName: 'Net',
+                authorLastName: 'Ninja',
+                authorId: 12345,
+                createdAt: new Date()
+            })
 
-        // } catch (err){
-        //     dispatch({type: 'CREATE_PROJECT_ERROR', err})
-        // }
+            dispatch({ type: 'CREATE_PROJECT', project })
 
+        } catch (err) {
+            dispatch({ type: 'CREATE_PROJECT_ERROR', err })
+        }
+
+    }
+}
+
+export const getProjects = () => {
+    if (projectSubscription !== null) 
+    return (dispatch, getState, { firebase }) => {
+        dispatch({ type: 'NO_CHANGE' })
+    }
+
+    return async (dispatch, getState, { firebase }) => {
+
+        try {
+            const firestore = firebase.firestore()
+
+            projectSubscription = firestore.collection('projects').onSnapshot(docs => {
+                let projects = []
+                docs.docs.forEach(doc => {
+                    projects.push({
+                        ...doc.data(),
+                        id: doc.id
+                    })
+                });
+
+                dispatch({ type: 'GET_PROJECTS', projects })
+            }, error => dispatch({ type: 'GET_PROJECTS_ERROR', error }))
+
+
+        } catch (err) {
+            dispatch({ type: 'GET_PROJECTS_ERROR', err })
+        }
+    }
+}
+
+export const getProject = (id) => {
+    return async (dispatch, getState, { firebase }) => {
+
+        try {
+            const firestore = firebase.firestore()
+
+            const doc = await firestore.collection('projects').doc(id).get()
+            if (doc.exists){
+                
+                let project = {
+                    ...doc.data(),
+                    id: doc.id
+                }
+                dispatch({ type: 'GET_PROJECT', project })
+
+            } else throw new Error('No document matching the ID')            
+
+        } catch (err) {
+            dispatch({ type: 'GET_PROJECT_ERROR', err })
+        }
     }
 }

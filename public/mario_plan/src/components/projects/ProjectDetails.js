@@ -1,22 +1,54 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { getProject } from '../../store/actions/ProjectActions'
+import { Redirect } from 'react-router-dom'
 
 const ProjectDetails = (props) => {
-    const id = props.match.params.id
+    if (!props.auth || !props.auth.uuid)
+        return <Redirect to={ process.env.PUBLIC_URL + '/signin'} />
 
+    if (props.noProj) props.getProject(props.match.params.id)
     return (
         <div className="container section preoject-details">
             <div className="card z-depth-0">
                 <div className="card-content">
-                    <span className="card-title">Project Title { id }</span>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>                
+                    <span className="card-title">{ props.project.title } - { props.project.id }</span>
+                    <p>{ props.project.content }</p>                
                 </div>
                 <div className="card-action grey lighten-4 grey grey-text">
-                    <div>Posted by Person One</div>
-                    <div>3rd January, 9am</div>
+                    <div>Posted by { props.project.authorFirstName }</div>
+                    <div>{  }</div>
                 </div>
             </div>
         </div>
     )
 }
 
-export default ProjectDetails
+const mapStateToProps = (state, ownProps) => {
+    const id = ownProps.match.params.id
+    // eslint-disable-next-line
+    const project = state.project.projects.find(p => p.id == id)
+    
+    if (project === undefined) {
+        return {
+            noProj: true,
+            project: {},
+            auth: state.auth.auth
+        }
+    } else {
+        return {
+            project,
+            auth: state.auth.auth
+        }
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getProject: (id) => {
+            dispatch(getProject(id))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetails)

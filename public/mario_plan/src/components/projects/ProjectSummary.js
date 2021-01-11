@@ -1,6 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
-const ProjectSummary = ({ project }) => {
+const ProjectSummary = ({ project, auth }) => {
+    if (!auth || !auth.uuid)
+        return <Redirect to={ process.env.PUBLIC_URL + '/signin'} />
+
     return(
         <div className="card z-depth-0 project-summary">
             <div className="card-content grey-text text-darken-3">
@@ -12,4 +17,10 @@ const ProjectSummary = ({ project }) => {
     )
 }
 
-export default ProjectSummary
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth.auth
+    }
+}
+
+export default connect(mapStateToProps)(ProjectSummary)

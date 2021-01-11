@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { createProject } from '../../store/actions/ProjectActions'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 class CreateProject extends Component {
     state = {
@@ -22,6 +23,9 @@ class CreateProject extends Component {
     }
 
     render() {
+        if (!this.props.auth || !this.props.auth.uuid)
+            return <Redirect to={ process.env.PUBLIC_URL + '/signin'} />
+
         return (
             <div className="container">
                 <form onSubmit={ this.onSubmit } className="white">
@@ -43,10 +47,16 @@ class CreateProject extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth.auth
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         createProject: (project) => dispatch(createProject(project))
     }
 }
 
-export default connect(null, mapDispatchToProps)(CreateProject)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProject)
