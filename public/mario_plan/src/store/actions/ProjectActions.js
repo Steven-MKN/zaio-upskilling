@@ -5,12 +5,13 @@ export const createProject = (project) => {
 
         try {
             const firestore = firebase.firestore()
+            const { firstName, lastName, uuid } = getState().auth.auth
 
             await firestore.collection('projects').add({
                 ...project,
-                authorFirstName: 'Net',
-                authorLastName: 'Ninja',
-                authorId: 12345,
+                authorFirstName: firstName,
+                authorLastName: lastName,
+                authorId: uuid,
                 createdAt: new Date()
             })
 

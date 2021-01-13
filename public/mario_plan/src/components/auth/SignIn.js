@@ -33,9 +33,9 @@ class SignIn extends Component {
         return (
             <div className="container">
                 {
-                    (this.props.auth && this.props.auth.error) ? (
+                    (this.props.error) ? (
                         <div className="red-text center">
-                            <p>{ this.props.auth.error.message }</p>
+                            <p>{ this.props.error.message }</p>
                         </div>
                     ) : null                   
                     
