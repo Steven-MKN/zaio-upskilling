@@ -16,35 +16,29 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+          with:
+            node-version: ${{ matrix.node-version }}
       - run: npm ci && npm run build
 
-      - name: setup todo list app
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
+      - name: setup todo list app        
       - run: npm ci --prefix ./public/todo_list
       - run: npm run build --prefix ./public/todo_list
       - run: mv -v ./public/todo_list/build/* ./public/todo_list
       
       - name: setup poke times app
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
       - run: npm ci --prefix ./public/poke_times
       - run: npm run build --prefix ./public/poke_times
       - run: mv -v ./public/poke_times/build/* ./public/poke_times
 
       - name: setup mario plan app
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
       - run: npm ci --prefix ./public/mario_plan
       - run: npm run build --prefix ./public/mario_plan
       - run: mv -v ./public/mario_plan/build/* ./public/mario_plan
       
       - name: deploy functions
-        run: cd functions && npm ci
-        uses: w9jds/firebase-action@master
+        run: npm ci --prefix ./functions
+      - uses: w9jds/firebase-action@master
         with:
           args: deploy --only functions
         env:
