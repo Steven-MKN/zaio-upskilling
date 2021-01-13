@@ -43,8 +43,8 @@ jobs:
       - run: mv -v ./public/mario_plan/build/* ./public/mario_plan
       
       - name: deploy functions
-      - run: cd functions && npm ci
-      - uses: w9jds/firebase-action@master
+        run: cd functions && npm ci
+        uses: w9jds/firebase-action@master
         with:
           args: deploy --only functions
         env:
