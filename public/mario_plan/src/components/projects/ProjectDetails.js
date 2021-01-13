@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { getProject } from '../../store/actions/ProjectActions'
 import { Redirect } from 'react-router-dom'
+import moment from 'moment'
 
 const ProjectDetails = (props) => {
     if (!props.auth || !props.auth.uuid)
@@ -17,7 +18,7 @@ const ProjectDetails = (props) => {
                 </div>
                 <div className="card-action grey lighten-4 grey grey-text">
                     <div>Posted by { props.project.authorFirstName }</div>
-                    <div>{  }</div>
+                    <div>{ moment(props.project.createdAt.toDate()).calendar() }</div>
                 </div>
             </div>
         </div>
