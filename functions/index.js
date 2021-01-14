@@ -31,3 +31,22 @@ exports.projectCreated = functions.firestore
 
     return createNotification(notification)
 })
+
+exports.userJoined = functions.auth.user().onCreate(async user => {
+
+  try {
+    const doc = await admin.firestore().collection('users').doc(user.uid).get()
+    const newUser = doc.data()
+    const notiification = {
+      content: 'Joined the party',
+      user: `${newUser.firstName} ${newUser.lastName}`,
+      time: admin.firestore.FieldValue.serverTimestamp()
+    }
+
+    return createNotification(notiification)
+  } catch (err){
+    console.log(err)    
+  }
+
+  return
+}) 

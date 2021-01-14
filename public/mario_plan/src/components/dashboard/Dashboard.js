@@ -3,11 +3,13 @@ import Notifications from './Notifications'
 import ProjectList from '../projects/ProjectList'
 import { connect } from 'react-redux'
 import { getProjects } from '../../store/actions/ProjectActions'
+import { getNotifications } from '../../store/actions/NotificationActions'
 import { Redirect } from 'react-router-dom'
 
 class Dashboard extends Component{
     componentDidMount() {
         this.props.getProjects()
+        this.props.getNotifications()
         //get auth state
     }
 
@@ -24,7 +26,7 @@ class Dashboard extends Component{
                     </div>
 
                     <div className="col s12 m5 offset-m1">
-                        <Notifications />
+                        <Notifications notifications={ this.props.notifications }/>
                     </div>
                 </div>
             </div>
@@ -35,7 +37,8 @@ class Dashboard extends Component{
 const mapStateToProps = (state) => {
     return {
         projects: state.project.projects,
-        auth: state.auth.auth
+        auth: state.auth.auth,
+        notifications: state.notification.notifications
     }
 }
 
@@ -43,6 +46,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getProjects: () => {
             dispatch(getProjects())
+        },
+        getNotifications: () => {
+            dispatch(getNotifications())
         }
     }
 }

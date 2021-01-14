@@ -35,7 +35,7 @@ export const getProjects = () => {
         try {
             const firestore = firebase.firestore()
 
-            projectSubscription = firestore.collection('projects').onSnapshot(docs => {
+            projectSubscription = firestore.collection('projects').orderBy('createdAt', 'desc').onSnapshot(docs => {
                 let projects = []
                 docs.docs.forEach(doc => {
                     projects.push({
