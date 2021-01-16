@@ -16,7 +16,7 @@ const createNotification = async (notification) => {
 
 exports.projectCreated = functions.firestore
   .document('projects/{projectId}')
-  .onCreate(doc => {
+  .onCreate(async doc => {
 
     // create notification
     const project = doc.data()
@@ -48,7 +48,7 @@ exports.userJoined = functions.auth.user().onCreate(async user => {
       time: admin.firestore.FieldValue.serverTimestamp()
     }
 
-    return createNotification(notiification)
+    await createNotification(notiification)
   } catch (err){
     console.log(err)    
   }
@@ -56,7 +56,7 @@ exports.userJoined = functions.auth.user().onCreate(async user => {
   return
 }) 
 
-exports.projectDeleted = functions.firestore.document('projects/{projectId}').onDelete(doc => {
+exports.projectDeleted = functions.firestore.document('projects/{projectId}').onDelete(async doc => {
   try {
     // decrease count
     const res = await admin.firestore().collection('meta').doc('projectsDocCount').update({ count: FieldValue.increament(-1) })
