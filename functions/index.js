@@ -28,7 +28,7 @@ exports.projectCreated = functions.firestore
 
     try {
       // increase count
-      const res = await admin.firestore().collection('meta').doc('projectsDocCount').update({ count: FieldValue.increament(1) })
+      const res = await admin.firestore().collection('meta').doc('projectsDocCount').update({ count: admin.firestore.FieldValue.increament(1) })
       console.log(res)
     } catch (err){
       console.log(err)
@@ -59,7 +59,7 @@ exports.userJoined = functions.auth.user().onCreate(async user => {
 exports.projectDeleted = functions.firestore.document('projects/{projectId}').onDelete(async doc => {
   try {
     // decrease count
-    const res = await admin.firestore().collection('meta').doc('projectsDocCount').update({ count: FieldValue.increament(-1) })
+    const res = await admin.firestore().collection('meta').doc('projectsDocCount').update({ count: admin.firestore.FieldValue.increament(-1) })
     console.log(res)
   } catch (err){
     console.log(err)
