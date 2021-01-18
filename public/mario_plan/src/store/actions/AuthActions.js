@@ -69,24 +69,25 @@ export const signUp = ({ email, password, firstName, lastName }) => {
 
 export const getInitState = () => {
     return async (dispatch, getState, { firebase }) => {
-        let user = firebase.auth().currentUser
-
-        if (user){
-            try {
-                const snapshot = await firebase.firestore().collection('users').doc(user.uid).get()
-
-                const data = {
-                    firstName: snapshot.data().firstName,
-                    lastName: snapshot.data().lastName,
-                    initials: snapshot.data().initials
+        firebase.auth().onAuthStateChanged(async (user) => {
+            if (user){
+                try {
+                    const snapshot = await firebase.firestore().collection('users').doc(user.uid).get()
+    
+                    const data = {
+                        firstName: snapshot.data().firstName,
+                        lastName: snapshot.data().lastName,
+                        initials: snapshot.data().initials
+                    }
+    
+                    dispatch({ type: 'GET_INIT_STATE', user, data })
+                } catch (error){
+                    dispatch({ type: 'GET_INIT_STATE_ERROR', error })
                 }
-
-                dispatch({ type: 'GET_INIT_STATE', user, data })
-            } catch (error){
-                dispatch({ type: 'GET_INIT_STATE_ERROR', error })
+            } else {
+                dispatch({ type: 'GET_INIT_STATE', user })
             }
-        }
+        })
 
-        dispatch({ type: 'GET_INIT_STATE', user: { ...user } })
     }
 }

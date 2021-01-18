@@ -73,7 +73,10 @@ const AuthReducer = (state = initState, action) => {
                     }
                 }
             } else {
-                return state
+                return {
+                    ...state,
+                    auth: null
+                }
             } 
             
         case 'GET_INIT_STATE_ERROR': 
