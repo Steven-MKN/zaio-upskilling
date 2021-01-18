@@ -1,4 +1,4 @@
-let projectSubscription = null
+//let lastDoc = []
 
 export const createProject = (project) => {
     return async (dispatch, getState, { firebase }) => {
@@ -24,28 +24,57 @@ export const createProject = (project) => {
     }
 }
 
-export const getProjects = () => {
-    if (projectSubscription !== null) 
-    return (dispatch, getState, { firebase }) => {
-        dispatch({ type: 'NO_CHANGE' })
-    }
+export const getProjectCount = () => {
+    return async (dispatch, getState, { firebase }) => {
+        try {            
+            firebase.firestore().collection('meta').doc('projectsDocCount').onSnapshot(doc => {
+                console.log(doc.data())
 
+                const count = doc.data().count
+
+                console.log(doc.data())
+
+                let pages = Math.ceil(count / 3)
+                console.log(pages)
+
+                dispatch({ type: 'PROJECTS_COUNT', pages })
+            })
+
+        } catch (error){
+            dispatch({ type: 'PROJECTS_COUNT_ERROR', error })
+        }
+    }
+}
+
+export const getProjects = (pageNum) => {
     return async (dispatch, getState, { firebase }) => {
 
         try {
             const firestore = firebase.firestore()
 
-            projectSubscription = firestore.collection('projects').orderBy('createdAt', 'desc').onSnapshot(docs => {
+            let query = firestore.collection('projects').orderBy('createdAt', 'desc')
+
+            // if (pageNum > 1 && lastDoc[pageNum - 2]){
+            //     const title = lastDoc[pageNum - 2].title
+            //     console.log(lastDoc[pageNum - 2])
+            //     query.startAfter(lastDoc[pageNum - 2])
+            // }
+            
+            //query.limit(3).onSnapshot(docs => {
+            query.onSnapshot(docs => {
                 let projects = []
                 docs.docs.forEach(doc => {
                     projects.push({
                         ...doc.data(),
                         id: doc.id
                     })
-                });
+                })
 
-                dispatch({ type: 'GET_PROJECTS', projects })
-            }, error => dispatch({ type: 'GET_PROJECTS_ERROR', error }))
+                // lastDoc[pageNum - 1] = docs.docs[2].data()
+                // console.log(lastDoc)
+
+                dispatch({ type: 'GET_PROJECTS', projects, pageNum })
+            }, err => dispatch({ type: 'GET_PROJECTS_ERROR', err }))
 
 
         } catch (err) {

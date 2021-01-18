@@ -1,5 +1,9 @@
 const initState = {
     projects: [],
+    projectPage: {
+        on: 1,
+        of: 1
+    },
     project: {
         title: '',
         content: '',
@@ -22,10 +26,16 @@ const ProjectReducer = (state = initState, action) => {
             return state
 
         case 'GET_PROJECTS':
+            const pageNum = action.pageNum
             const projects = action.projects
+
             return {
                 ...state,
-                projects
+                projects: [...projects],
+                projectPage: {
+                    ...state.projectPage,
+                    on: pageNum
+                }
             }
 
         case 'GET_PROJECTS_ERROR':
@@ -44,6 +54,15 @@ const ProjectReducer = (state = initState, action) => {
             return state
 
         case 'NO_CHANGE': return state
+
+        case 'PROJECTS_COUNT':
+            return {
+                ...state,
+                projectPage: {
+                    ...state.projectPage,
+                    of: action.pages
+                }
+            }
 
         default: return state
     }
